@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Review Page</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" href="./style.css">
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .reviews {
+            margin-top: 20px;
+        }
+
+        .review {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <section id="header">
+        <a href=""><img src="./logo.png" alt=""></a>
+
+        <div>
+            <ul id="navbar">
+                <li><a class="active"  href="index.html">Home</a></li>
+                <li><a href="Reviews.html">Reviews</a></li>
+                <li><a href="about.html">about</a></li>
+                <li><a href="contact.html">contact</a></li>
+                <li><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                <a href="#" id="close"><i class="fas fa-times"></i></a>
+            </ul>
+        </div>
+
+
+        <div id="mobile">
+            <i  id="bar" class="fas fa-outdent"></i>
+        </div>
+        <div id="clock"></div>
+    </section>
+</header>
+    <main>
+        <h2>Write a Review</h2>
+        <form id="reviewForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="review">Review:</label>
+            <textarea id="review" name="review" rows="4" required></textarea>
+
+            <button type="button" onclick="submitReview()">Submit Review</button>
+        </form>
+
+        <div class="reviews">
+            <h2>Customer Reviews</h2>
+            <div id="reviewContainer"></div>
+        </div>
+        
+    </main>
+
+    <footer class="section-p1">
+        <div class="contact details">
+            <img  id="logo"   src="./logo.png" alt="">
+            <h4>Contact</h4>
+           <p><strong>Headquarters:</strong>24,Industrial Zone,Greater Noida Extension,Gautam Buddh Nagar,203207,UTTAR PRADESH,INDIA.</p>
+           <p><strong>Phone</strong>+91 120-000-980-807.</p>
+    
+           <div class="follow">
+            <h4>Follow Us</h4>
+            <div class="icon">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-pinterest-p"></i>
+                <i class="fab fa-youtube"></i>
+                <br>
+                <br>
+            </div>
+           </div>
+        </div>
+           <div class="about" >
+           
+                <h5>About</h5>
+                <a href="">About us</a>
+                <a href="">Service Information</a>
+                <a href="">Privacy policy</a>
+                <a href="">Terms & conditions</a>
+                <a href="">Contact Us</a>
+           
+           </div>
+    
+           
+           <div class="about">
+           
+                <h5>My Account</h5>
+                <a href="">Sign In</a>
+                <a href="">View cart</a>
+                <a href="">My wishlist</a>
+                <a href="">Track my Services</a>
+                <a href="">Help</a>
+           
+           </div>
+    
+           <div class="install">
+                    
+            <h5>Install apps</h5>
+    
+            <p>From App Store Or Google Pay</p>
+            <img src="./pay/app.jpg" alt="" class="img">
+            <img src="./pay/play.jpg" alt="" class="img">
+            
+    
+            <p>Secured payment getways</p>
+    
+            <img src="./pay/pay.png" alt="">
+           </div>
+    
+    <div class="copyright">
+        <p><br>
+           <center>COPYRIGHT © 2024 TECHFUSION, ALL RIGHTS RESERVED</center></p>
+    </div>
+     
+       </footer>
+    
+
+
+    <script>
+        function submitReview() {
+            var name = document.getElementById('name').value;
+            var review = document.getElementById('review').value;
+
+        
+
+    
+            var reviewElement = document.createElement('div');
+            reviewElement.className = 'review';
+            reviewElement.innerHTML = '<strong>' + name + ':</strong><br>' + review;
+
+        
+            document.getElementById('reviewContainer').appendChild(reviewElement);
+
+            
+            document.getElementById('name').value = '';
+            document.getElementById('review').value = '';
+        }
+
+        function updateClock() {
+            var options = { timeZone: 'Asia/Kolkata', hour12: false };
+            var now = new Date().toLocaleTimeString('en-US', options);
+            document.getElementById('clock').innerText = now +'hours';
+        }
+
+    
+        setInterval(updateClock, 1000);
+
+    
+        updateClock();
+    </script>
+     
+</body>
+
+</html>

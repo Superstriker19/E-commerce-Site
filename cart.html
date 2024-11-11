@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        /* Add the CSS styles here */
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        section#shmiddle {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 8px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+    <section id="header">
+        <!-- Header content remains unchanged -->
+    </section>
+
+    <section id="shmiddle" class="about-img section-p1">
+        <h2>Cart</h2>
+        <p>Here is a list of services you have chosen us to serve you with.</p>
+    </section>
+
+    <h1>Shopping Cart</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="cart-items"></tbody>
+    </table>
+
+    <button id="submitBtn">Submit Order</button>
+
+    <script>
+        // cart.html script
+        document.addEventListener("DOMContentLoaded", function () {
+            const cartTable = document.getElementById('cart-items');
+
+            // Get cart items from localStorage
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Display cart items
+            cartItems.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${item.name}</td><td>$${item.price}</td><td><button class="delete-btn" onclick="deleteItem(${index})">Delete</button></td>`;
+                cartTable.appendChild(tr);
+            });
+        });
+
+        // Delete item function
+        function deleteItem(index) {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            cartItems.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+
+            // Refresh the page to reflect changes
+            location.reload();
+        }
+
+        // You can add event listener for the submit button here
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.addEventListener('click', function () {
+            // Handle the submission logic
+            alert('Order Submitted!');
+        });
+    
+    function addToCart(button) {
+        var serviceName = button.parentNode.getAttribute("data-service");
+        var servicePrice = parseFloat(button.parentNode.getAttribute("data-price"));
+    
+        // Retrieve existing cart items or create an empty array
+        var cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    
+        // Check if the service is already in the cart
+        var existingItemIndex = cartItems.findIndex(item => item.name === serviceName);
+    
+        if (existingItemIndex !== -1) {
+            // Increment quantity if the service is already in the cart
+            cartItems[existingItemIndex].quantity++;
+        } else {
+            // Add a new item to the cart
+            cartItems.push({ name: serviceName, price: servicePrice, quantity: 1 });
+        }
+    
+        // Update the cart in local storage
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+    
+        alert("Item added to cart!");
+    }
+    </script>
+    
+    <script src="./script.js"></script>
+
+</body>
+</html>
+
